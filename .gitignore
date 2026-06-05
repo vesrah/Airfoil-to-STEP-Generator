@@ -1,0 +1,3 @@
+env
+*.step
+.DS_Store
