@@ -129,14 +129,16 @@ def generate_parametric_airfoil_step(
         for x, y in normalized_points
     ]
 
-    if scaled_points[0] != scaled_points[-1]:
-        scaled_points.append(scaled_points[0])
+    # If the first and last points are identical, remove the last one so CadQuery's
+    # .spline() and .close() don't conflict or create zero-length geometry artifacts
+    if len(scaled_points) > 1 and scaled_points[0] == scaled_points[-1]:
+        scaled_points.pop()
 
-    print("Generating 3D geometry via CadQuery...")
+    print("Generating 3D geometry via CadQuery (using smooth splines)...")
 
     airfoil_profile = (
         cq.Workplane("XY")
-        .polyline(scaled_points)
+        .spline(scaled_points)
         .close()
         .extrude(span_mm)
     )

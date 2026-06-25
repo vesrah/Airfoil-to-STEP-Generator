@@ -1,6 +1,6 @@
 # Airfoil to STEP Generator
 
-Generates a 3D STEP model from an airfoil definition hosted on AirfoilTools.
+Generates a 3D CAD model in STEP format using data retrieved from AirfoilTools
 
 ## Setup
 
